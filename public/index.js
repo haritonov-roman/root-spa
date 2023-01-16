@@ -1,16 +1,10 @@
 'use strict'
-import { app, Node } from './root.js'
-import { btn } from './btn.js';
+import { root } from './root.js';
+import { mainPage } from './main.js';
 
-app(new Node({
-  name: 'div',
-  attributes: [
-    {
-      name: 'class',
-      value: 'app'
-    }
-  ],
-  children: [
-    btn({ text: 'start' })
+
+root({
+  pages: [
+    mainPage()
   ]
-}).node);
+});
