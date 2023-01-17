@@ -1,7 +1,7 @@
-import { Node } from './root.js'
+import { node } from './root.js'
 
 export function indicator({ counter }) {
-  return new Node({
+  return node({
     name: 'indicator',
     attributes: [
       {

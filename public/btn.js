@@ -1,4 +1,4 @@
-import { Node, proxiRef, proxiComp } from './root.js'
+import { Node, node, proxiRef, proxiComp } from './root.js'
 
 export function btn({ test }) {
   const pRef = proxiRef(0);
@@ -7,7 +7,7 @@ export function btn({ test }) {
     return `${pRef.value}_btn`
   }, [pRef])
 
-  return new Node({
+  const btn = node({
     name: 'btn',
     tagName: 'button',
     attributes: [
@@ -30,5 +30,9 @@ export function btn({ test }) {
     handlers: {
       test
     }
-  })
+  });
+
+  console.log(btn);
+
+  return btn
 }

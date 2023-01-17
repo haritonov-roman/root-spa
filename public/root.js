@@ -1,8 +1,6 @@
-export function root(config) {
-  return new Root(config).create()
-}
-
 class Root {
+  pages = null
+
   constructor({ pages = [] }) {
     this.pages = pages;
   }
@@ -18,21 +16,22 @@ class Root {
   }
 }
 
-export class Node extends Root {
+export function root(config) {
+  return new Root(config).create()
+}
+
+export class Node {
   parent = null
   contentNode = null
 
   constructor({ name, tagName = 'div', attributes = [], events = [], value = '', children = [], handlers = {} }) {
-    super({});
     this.name = name;
-    this.tagName = tagName;
     this.attributes = attributes;
     this.events = events;
-    this.children = children;
     this.handlers = handlers;
     this.value = value;
 
-    this.render(value);
+    this.render(tagName, value, children);
     this.update();
   }
 
@@ -58,8 +57,22 @@ export class Node extends Root {
     }
   }
 
-  render(value) {
-    this.node = document.createElement(this.tagName)
+  createNode(tagName) {
+    this.node = document.createElement(tagName)
+  }
+
+  setChildren(children) {
+    if (children.length) {
+      children.forEach((child) => {
+        child.setParent(this);
+
+        this.node.append(child.node);
+      })
+    }
+  }
+
+  render(tagName, value, children) {
+    this.createNode(tagName);
 
     if (value) {
       this.contentNode = document.createElement('span')
@@ -80,13 +93,7 @@ export class Node extends Root {
       })
     }
 
-    if (this.children.length) {
-      this.children.forEach((child) => {
-        child.setParent(this);
-
-        this.node.append(child.node);
-      })
-    }
+    this.setChildren(children);
   }
 
   setParent(object) {
@@ -98,11 +105,13 @@ export class Node extends Root {
   }
 }
 
-export class Page extends Node {
-  // constructor({ name, attributes, events, content, children, handlers }) {
-  //   super({ name, attributes, events, content, children, handlers });
-  // }
+export function node(params) {
+  const node = new Node(params);
+
+  return node
 }
+
+// export class Page extends Node {}
 
 class ProxiRef {
   subscribers = []
@@ -148,8 +157,6 @@ export function proxiComp(fn, subs) {
       return true;
     }
   });
-
-  console.log(fn);
 
   subs.forEach((sub) => {
     sub.subsribeObj(comp);

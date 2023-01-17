@@ -1,4 +1,4 @@
-import { Page, proxiRef, proxiComp } from './root.js'
+import { node, proxiRef, proxiComp } from './root.js'
 import { btn } from './btn.js';
 import { indicator } from './indicator.js';
 
@@ -10,7 +10,7 @@ export function mainPage() {
     return `${counter1.value}_${counter2.value}`
   }, [counter1, counter2])
 
-  return new Page({
+  return node({
     name: 'mainPage',
     attributes: [
       {
