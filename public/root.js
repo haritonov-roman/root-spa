@@ -21,7 +21,7 @@ export function root(config) {
 }
 
 export class Node {
-  parent = null
+  // parent = null
   contentNode = null
 
   constructor({ name, tagName = 'div', attributes = [], events = [], value = '', children = [], handlers = {} }) {
@@ -64,7 +64,7 @@ export class Node {
   setChildren(children) {
     if (children.length) {
       children.forEach((child) => {
-        child.setParent(this);
+        // child.setParent(this);
 
         this.node.append(child.node);
       })
@@ -96,9 +96,9 @@ export class Node {
     this.setChildren(children);
   }
 
-  setParent(object) {
-    this.parent = object;
-  }
+  // setParent(object) {
+  //   this.parent = object;
+  // }
 
   emit(event, payload) {   
     this.handlers[`${event}`](payload);
