@@ -1,16 +1,16 @@
-import { node, proxiRef, proxiComp } from './root.js'
+import { rootElem, rootRef, rootComp } from './root/api.js'
 import { btn } from './btn.js';
 import { indicator } from './indicator.js';
 
 export function mainPage() {
-  const counter1 = proxiRef(0);
-  const counter2 = proxiRef(0);
+  const counter1 = rootRef(0);
+  const counter2 = rootRef(0);
 
-  const compData = proxiComp(function () {
+  const compData = rootComp(function () {
     return `${counter1.value}_${counter2.value}`
   }, [counter1, counter2])
 
-  return node({
+  const page = rootElem({
     name: 'mainPage',
     attributes: [
       {
@@ -33,5 +33,9 @@ export function mainPage() {
         counter: compData
       })
     ]
-  })
+  });
+
+  // console.dir(page);
+
+  return page
 }

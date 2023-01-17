@@ -1,5 +1,5 @@
 'use strict'
-import { root } from './root.js';
+import { root } from './root/api.js';
 import { mainPage } from './main.js';
 
 

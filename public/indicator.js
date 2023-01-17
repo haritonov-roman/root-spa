@@ -1,7 +1,7 @@
-import { node } from './root.js'
+import { rootElem } from './root/api.js'
 
 export function indicator({ counter }) {
-  return node({
+  return rootElem({
     name: 'indicator',
     attributes: [
       {
@@ -9,6 +9,6 @@ export function indicator({ counter }) {
         value: 'indicator'
       }
     ],
-    value: counter
+    content: counter
   })
 }
