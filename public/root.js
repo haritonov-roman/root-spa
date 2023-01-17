@@ -104,28 +104,11 @@ export class Page extends Node {
   // }
 }
 
-export class Reflection {
-  _value = null
+class ProxiRef {
   subscribers = []
 
   constructor(value) {
-    this._value = value
-  }
-
-  get value() {
-    return this.getValue()
-  }
-
-  set value(newValue) {
-    this.setValue(newValue);
-  }
-
-  getValue() {
-    return this._value
-  }
-
-  setValue(newValue) {
-    this._value = newValue;
+    this.value = value;
   }
 
   subsribeObj(object) {
@@ -139,33 +122,38 @@ export class Reflection {
   }
 }
 
-export class ReValue extends Reflection {
-  setValue(setValue) {
-    super.setValue(setValue);
-    this.notifySubsribers(this._value);
-  }
+export function proxiRef(defaultValue) {
+  return new Proxy(new ProxiRef(defaultValue), {
+    set(target, value, newValue) {
+      target[value] = newValue;
+
+      target.notifySubsribers(target[value]);
+
+      return true;
+    }
+  })
 }
 
-export class CompValue extends Reflection {
-  constructor(value, subs) {
-    super(value);
+export function proxiComp(fn, subs) {
+  const comp = new Proxy(new ProxiRef(fn), {
+    get(target, value) {
+      if (value === 'value') {
+        return target[value]();
+      } else {
+        return target[value];
+      }
+    },
+    set(target, value) {
+      target.notifySubsribers(target[value]());
+      return true;
+    }
+  });
 
-    subs.forEach((sub) => {
-      sub.subsribeObj(this);
-    })
-  }
+  console.log(fn);
 
-  getValue() {
-    return this._value();
-  }
+  subs.forEach((sub) => {
+    sub.subsribeObj(comp);
+  });
 
-  setValue() {
-    this.notifySubsribers(this._value);
-  }
-
-  notifySubsribers(value) {
-    this.subscribers.forEach((item) => {
-      item.value = value();
-    });
-  }
+  return comp
 }

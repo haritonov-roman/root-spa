@@ -1,12 +1,12 @@
-import { Page, ReValue, CompValue } from './root.js'
+import { Page, proxiRef, proxiComp } from './root.js'
 import { btn } from './btn.js';
 import { indicator } from './indicator.js';
 
 export function mainPage() {
-  const counter1 = new ReValue(0);
-  const counter2 = new ReValue(0);
+  const counter1 = proxiRef(0);
+  const counter2 = proxiRef(0);
 
-  const compData = new CompValue(function () {
+  const compData = proxiComp(function () {
     return `${counter1.value}_${counter2.value}`
   }, [counter1, counter2])
 

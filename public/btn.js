@@ -1,11 +1,11 @@
-import { Node, ReValue, CompValue } from './root.js'
+import { Node, proxiRef, proxiComp } from './root.js'
 
 export function btn({ test }) {
-  const rData = new ReValue(0);
+  const pRef = proxiRef(0);
 
-  const compData = new CompValue(function() {
-    return `${rData.value}_btn`
-  }, [rData])
+  const pComp = proxiComp(function () {
+    return `${pRef.value}_btn`
+  }, [pRef])
 
   return new Node({
     name: 'btn',
@@ -16,14 +16,14 @@ export function btn({ test }) {
         value: 'btn'
       }
     ],
-    value: compData,
+    value: pComp,
     events: [
       {
         name: 'click',
         callback: function () {
-          rData.value++;
+          pRef.value++;
 
-          this.emit('test', rData.value);
+          this.emit('test', pRef.value);
         }
       }
     ],
