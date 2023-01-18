@@ -1,11 +1,10 @@
-import { rootElem } from './root/api.js'
+import { rootElem } from './root/api.js';
 import { nav } from './nav.js';
 import { title } from './title.js';
-import { counters } from './counters.js';
 
-export function mainPage() {
+export function aboutPage() {
   return rootElem({
-    name: 'mainPage',
+    name: 'aboutPage',
     attributes: [
       {
         name: 'class',
@@ -15,9 +14,8 @@ export function mainPage() {
     children: [
       nav(),
       title({
-        title: 'Home'
+        title: 'About'
       }),
-      counters()
     ]
   });
 }

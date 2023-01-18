@@ -10,10 +10,38 @@
   >
   <title>RootSPA</title>
   <style>
-    .main {
+    body {
+      margin: 0;
+    }
+
+    .page {
       display: flex;
+      flex-direction: column;
+      padding: 72px 16px 0;
+    }
+
+    .nav {
+      position: fixed;
+      left: 0;
+      top: 0;
+      display: flex;
+      align-items: flex-start;
+      grid-column-gap: 16px;
+      width: 100%;
+      padding: 24px 16px;
+      background-color: cornsilk;
+    }
+
+    .counters {
+      display: flex;
+      align-items: flex-start;
       align-items: center;
       grid-column-gap: 16px;
+      width: 100%;
+    }
+
+    .title {
+      margin: 24px 0;
     }
 
     .indicator {

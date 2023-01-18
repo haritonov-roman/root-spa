@@ -1,10 +1,18 @@
 'use strict'
 import { root } from './root/api.js';
 import { mainPage } from './main.js';
+import { aboutPage } from './about.js';
 
 
 root({
   pages: [
-    mainPage()
+    {
+      path: '#/',
+      page: mainPage
+    },
+    {
+      path: '#/about',
+      page: aboutPage
+    }
   ]
 });

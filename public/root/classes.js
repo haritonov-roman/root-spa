@@ -1,18 +1,45 @@
 export class Root {
   pages = null
+  currentPage = null
 
   constructor({ pages = [] }) {
     this.pages = pages;
+
+    this.checkRoute();
+  }
+
+  checkRoute() {
+    return window.location.hash
   }
 
   create() {
-    this.node = document.createElement('div');
+    window.location.hash = '#/'
+
+    window.addEventListener('hashchange', () => {
+      this.render();
+    });
+
+    this.node = document.createElement('root');
 
     document.querySelector('body').prepend(this.node);
 
-    this.node.append(this.pages[0].node);
+    this.render();
 
     return this.node
+  }
+
+  render() {
+    const page = this.pages.find((item) => {
+      return item.path === this.checkRoute()
+    }).page();
+
+    if (this.currentPage) {
+      this.currentPage.replaceWith(page.node);
+    } else {
+      this.node.append(page.node);
+    }
+
+    this.currentPage = page.node;
   }
 }
 
