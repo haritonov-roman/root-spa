@@ -1,6 +1,6 @@
 import { rootElem, rootRef, rootComp } from '../root/api.js'
-import { counter } from '../components/counter.js';
-import { indicator } from '../components/indicator.js';
+import { counter } from './counter.js';
+import { indicator } from './indicator.js';
 
 export function counters() {
   const counter1 = rootRef(0);

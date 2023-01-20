@@ -1,6 +1,7 @@
 import { rootElem } from '../root/api.js';
 import { nav } from '../components/nav.js';
 import { title } from '../components/title.js';
+import { list } from '../components/list.js';
 
 export function aboutPage() {
   return rootElem({
@@ -16,6 +17,7 @@ export function aboutPage() {
       title({
         title: 'About'
       }),
+      list()
     ]
   });
 }

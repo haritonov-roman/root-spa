@@ -13,15 +13,15 @@ export class Root {
   }
 
   create() {
-    window.location.hash = '#/'
+    if (!window.location.hash) {
+      window.location.hash = '#/'
+    }
 
     window.addEventListener('hashchange', () => {
       this.render();
     });
 
     this.node = document.createElement('root');
-
-    console.log(this.node);
 
     document.querySelector('body').prepend(this.node);
 
