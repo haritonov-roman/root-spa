@@ -1,4 +1,4 @@
-import { rootElem } from './root/api.js'
+import { rootElem } from '../root/api.js'
 
 export function title({ title }) {
   return rootElem({

@@ -21,6 +21,8 @@ export class Root {
 
     this.node = document.createElement('root');
 
+    console.log(this.node);
+
     document.querySelector('body').prepend(this.node);
 
     this.render();

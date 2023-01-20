@@ -1,6 +1,6 @@
-import { rootElem } from './root/api.js';
-import { nav } from './nav.js';
-import { title } from './title.js';
+import { rootElem } from '../root/api.js';
+import { nav } from '../components/nav.js';
+import { title } from '../components/title.js';
 
 export function aboutPage() {
   return rootElem({

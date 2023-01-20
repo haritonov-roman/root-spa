@@ -1,4 +1,4 @@
-import { rootElem, rootRef, rootComp } from './root/api.js'
+import { rootElem, rootRef, rootComp } from '../root/api.js'
 
 export function counter({ test }) {
   const pRef = rootRef(0);

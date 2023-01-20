@@ -1,5 +1,5 @@
-import { rootElem } from './root/api.js'
-import { btn } from './btn.js';
+import { rootElem } from '../root/api.js'
+import { btn } from '../components/btn.js';
 
 export function nav() {
   return rootElem({

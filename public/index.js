@@ -1,7 +1,7 @@
 'use strict'
 import { root } from './root/api.js';
-import { mainPage } from './main.js';
-import { aboutPage } from './about.js';
+import { mainPage } from './pages/main.js';
+import { aboutPage } from './pages/about.js';
 
 
 root({
